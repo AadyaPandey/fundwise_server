@@ -1,10 +1,10 @@
-# GrantGuard — AI-Powered Multi-Agent Grant Review System
+# FundWise — AI-Powered Multi-Agent Grant Review System
 
 ## Overview
 
-**GrantGuard** is a production-oriented AI system that automates the first-pass review of NGO grant applications using a **multi-agent architecture** built with **LangGraph**.
+**FundWise** is a production-oriented AI system that automates the first-pass review of NGO grant applications using a **multi-agent architecture** built with **LangGraph**.
 
-Instead of functioning as a chatbot, GrantGuard simulates the workflow of a human grant review committee by breaking the evaluation process into specialized agents. Each agent has a single responsibility and communicates through structured outputs, making the system modular, explainable, and easy to extend.
+Instead of functioning as a chatbot, FundWise simulates the workflow of a human grant review committee by breaking the evaluation process into specialized agents. Each agent has a single responsibility and communicates through structured outputs, making the system modular, explainable, and easy to extend.
 
 The goal is **not** to replace human reviewers, but to provide an intelligent, transparent, and secure recommendation before final approval.
 
@@ -40,7 +40,7 @@ Grant applications typically require reviewers to manually verify:
 
 Manual review is time-consuming, inconsistent, and difficult to scale.
 
-GrantGuard automates this first-pass review while maintaining transparency and allowing human reviewers to make the final decision.
+FundWise automates this first-pass review while maintaining transparency and allowing human reviewers to make the final decision.
 
 ---
 
@@ -284,7 +284,7 @@ The Judge is the only component responsible for making the final recommendation.
 # Folder Structure
 
 ```text
-GrantGuard/
+FundWise/
 │
 ├── agents/
 │   ├── planner.py
@@ -360,7 +360,7 @@ Each tool focuses on producing evidence rather than making approval decisions.
 
 **Status:** In Progress
 
-The Policy RAG module will allow GrantGuard to evaluate applications against funding policies.
+The Policy RAG module will allow FundWise to evaluate applications against funding policies.
 
 Workflow:
 
@@ -397,7 +397,7 @@ Benefits:
 
 # Security Features
 
-GrantGuard includes a hybrid security pipeline designed to protect against prompt injection attacks.
+FundWise includes a hybrid security pipeline designed to protect against prompt injection attacks.
 
 Rule-Based Detection:
 
@@ -446,84 +446,6 @@ Each scenario executes the complete LangGraph workflow.
 
 ---
 
-# Project Roadmap
-
-## Phase 1 ✅
-
-- Planner Agent
-- Worker Agent
-- Registration Tool
-- Budget Tool
-- Eligibility Tool
-- Quality Reviewer
-- Hybrid Security Reviewer
-- Judge Agent
-
----
-
-## Phase 2 🚧
-
-- Policy RAG
-- ChromaDB
-- Vector Embeddings
-- Policy Retriever
-
----
-
-## Phase 3
-
-- Risk Assessment Tool
-- Duplicate Detection Tool
-
----
-
-## Phase 4
-
-- Judge v2
-- Evidence-based decision engine
-
----
-
-## Phase 5
-
-- FastAPI Backend
-- REST API
-- Authentication
-- Logging
-- Error Handling
-
----
-
-## Phase 6
-
-- Frontend Dashboard
-- Human Review Interface
-- Grant Upload Portal
-- Decision Visualization
-
----
-
-## Phase 7
-
-- PostgreSQL
-- Persistent Storage
-- User Management
-- Audit Logs
-
----
-
-## Phase 8
-
-- Docker
-- CI/CD
-- Cloud Deployment
-- Monitoring
-- Observability
-- Metrics
-- Production Scaling
-
----
-
 # Future Enhancements
 
 - OCR for scanned grant documents
@@ -546,7 +468,7 @@ Clone the repository:
 
 ```bash
 git clone <repository-url>
-cd GrantGuard
+cd FundWise
 ```
 
 Create a virtual environment:
@@ -585,6 +507,6 @@ python app.py
 
 # Vision
 
-GrantGuard aims to demonstrate how modern AI engineering techniques—including multi-agent orchestration, structured outputs, retrieval-augmented generation, security analysis, and explainable decision-making—can be combined to build a reliable, production-ready grant review platform.
+FundWise aims to demonstrate how modern AI engineering techniques—including multi-agent orchestration, structured outputs, retrieval-augmented generation, security analysis, and explainable decision-making—can be combined to build a reliable, production-ready grant review platform.
 
 The long-term objective is to create an extensible system that assists human reviewers by automating repetitive verification tasks while preserving transparency, accountability, and security throughout the review process.
