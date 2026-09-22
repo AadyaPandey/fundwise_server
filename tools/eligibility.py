@@ -23,7 +23,7 @@ def eligibility_tool(application: dict) -> ToolResult:
     years_operating = application.get("years_operating", 0)
     beneficiaries = application.get("beneficiaries", 0)
     grant_category = application.get("grant_category", "")
-    requested_amount = application.get("requested_amount", 0)
+    requested_amount = float(application.get("requested_amount", 0))
 
     issues = []
 
