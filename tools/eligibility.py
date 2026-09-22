@@ -20,8 +20,8 @@ def eligibility_tool(application: dict) -> ToolResult:
     Evaluate whether the NGO is eligible for grant consideration.
     """
 
-    years_operating = application.get("years_operating", 0)
-    beneficiaries = application.get("beneficiaries", 0)
+    years_operating = int(application.get("years_operating", 0))
+    beneficiaries = int(application.get("beneficiaries", 0))
     grant_category = application.get("grant_category", "")
     requested_amount = float(application.get("requested_amount", 0))
 
