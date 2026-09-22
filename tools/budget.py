@@ -11,7 +11,7 @@ def budget_tool(application: dict) -> ToolResult:
     Validate the submitted project budget.
     """
 
-    requested_amount = application.get("requested_amount", 0)
+    requested_amount = float(application.get("requested_amount", 0))
     budget = application.get("budget", {})
 
     total_budget = sum(budget.values())
