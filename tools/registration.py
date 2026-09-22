@@ -10,7 +10,7 @@ def registration_tool(application: dict) -> ToolResult:
     """
 
     registration_number = application.get("registration_number")
-    years_operating = application.get("years_operating", 0)
+    years_operating = int(application.get("years_operating", 0))
     documents = application.get("documents", [])
 
     certificate_found = REQUIRED_REGISTRATION_DOCUMENT in documents
