@@ -20,31 +20,61 @@ def eligibility_tool(application: dict) -> ToolResult:
     Evaluate whether the NGO is eligible for grant consideration.
     """
 
-    years_operating = int(application.get("years_operating", 0))
-    beneficiaries = int(application.get("beneficiaries", 0))
-    grant_category = application.get("grant_category", "")
-    requested_amount = float(application.get("requested_amount", 0))
+    try:
+        years_operating = int(
+            application.get("years_operating", 0)
+        )
+
+        beneficiaries = int(
+            application.get("beneficiaries", 0)
+        )
+
+        grant_category = application.get(
+            "grant_category", ""
+        )
+
+        requested_amount = float(
+            application.get("requested_amount", 0)
+        )
+
+    except (TypeError, ValueError) as e:
+        return ToolResult(
+            tool="eligibility",
+            status="FAILED",
+            success=False,
+            reason=f"Invalid application data: {str(e)}",
+            data={
+                "eligible": False,
+                "issues": [
+                    "One or more eligibility fields contain invalid values."
+                ],
+            },
+        )
 
     issues = []
 
     if years_operating < MIN_YEARS_OPERATING:
         issues.append(
-            f"NGO must have at least {MIN_YEARS_OPERATING} years of operation."
+            f"NGO must have at least "
+            f"{MIN_YEARS_OPERATING} years of operation."
         )
 
     if beneficiaries < MIN_BENEFICIARIES:
         issues.append(
-            f"Project must benefit at least {MIN_BENEFICIARIES} beneficiaries."
+            f"Project must benefit at least "
+            f"{MIN_BENEFICIARIES} beneficiaries."
         )
 
     if grant_category not in SUPPORTED_CATEGORIES:
         issues.append(
-            f"Grant category '{grant_category}' is not supported."
+            f"Grant category '{grant_category}' "
+            f"is not supported."
         )
 
     if requested_amount > MAX_REQUESTED_AMOUNT:
         issues.append(
-            f"Requested amount exceeds the maximum allowed limit of ₹{MAX_REQUESTED_AMOUNT:,}."
+            f"Requested amount exceeds the maximum allowed "
+            f"limit of ₹{MAX_REQUESTED_AMOUNT:,}."
         )
 
     eligible = len(issues) == 0
