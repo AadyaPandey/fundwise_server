@@ -10,10 +10,48 @@ def registration_tool(application: dict) -> ToolResult:
     """
 
     registration_number = application.get("registration_number")
-    years_operating = int(application.get("years_operating", 0))
+
+    try:
+        years_operating = int(
+            application.get("years_operating", 0)
+        )
+    except (TypeError, ValueError):
+        return ToolResult(
+            tool="registration",
+            status="FAILED",
+            success=False,
+            reason="Invalid years operating value.",
+            data={
+                "valid": False,
+                "registration_number": registration_number,
+                "certificate_found": False,
+                "issues": [
+                    "Years operating must be a valid number."
+                ],
+            },
+        )
+
     documents = application.get("documents", [])
 
-    certificate_found = REQUIRED_REGISTRATION_DOCUMENT in documents
+    if not isinstance(documents, list):
+        return ToolResult(
+            tool="registration",
+            status="FAILED",
+            success=False,
+            reason="Invalid documents format.",
+            data={
+                "valid": False,
+                "registration_number": registration_number,
+                "certificate_found": False,
+                "issues": [
+                    "Documents must be provided as a list."
+                ],
+            },
+        )
+
+    certificate_found = (
+        REQUIRED_REGISTRATION_DOCUMENT in documents
+    )
 
     valid = (
         bool(registration_number)
@@ -24,13 +62,19 @@ def registration_tool(application: dict) -> ToolResult:
     issues = []
 
     if not registration_number:
-        issues.append("Registration number is missing.")
+        issues.append(
+            "Registration number is missing."
+        )
 
     if years_operating <= 0:
-        issues.append("Invalid years operating.")
+        issues.append(
+            "Invalid years operating."
+        )
 
     if not certificate_found:
-        issues.append("Registration Certificate not submitted.")
+        issues.append(
+            "Registration Certificate not submitted."
+        )
 
     return ToolResult(
         tool="registration",

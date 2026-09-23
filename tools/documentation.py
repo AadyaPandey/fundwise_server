@@ -16,7 +16,22 @@ def documentation_tool(application: dict) -> ToolResult:
     Verify that all mandatory supporting documents have been submitted.
     """
 
-    submitted_documents = set(application.get("documents", []))
+    documents = application.get("documents", [])
+
+    if not isinstance(documents, list):
+        return ToolResult(
+            tool="documentation",
+            status="FAILED",
+            success=False,
+            reason="Invalid documents format.",
+            data={
+                "complete": False,
+                "missing_documents": sorted(REQUIRED_DOCUMENTS),
+                "missing_count": len(REQUIRED_DOCUMENTS),
+            },
+        )
+
+    submitted_documents = set(documents)
 
     missing_documents = sorted(
         REQUIRED_DOCUMENTS - submitted_documents
