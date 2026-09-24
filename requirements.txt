@@ -23,7 +23,7 @@ langchain-google-genai
 
 
 langgraph
-
+python-jose
 
 google-generativeai
 google-genai
